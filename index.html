@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css" />    
+</head>
+
+<body>
+    <div>
+        <div id="userNums"></div>
+        <div id="winNums"></div>
+        <div id="numMatches"></div>
+        <div id="lucky"></div>
+        <div id="payout"></div>
+    </div>
+
+    <script>
+        // Generating winning numbers and prompting user guesses
+        var winNums = new Array(5);
+        var luckyBall, results;
+        // Selecting the 5 winning numbers
+        for (let i = 0; i < 5; i++) {
+            winNums[i] = Math.floor(Math.random() * (48 - 1 + 1)) + 1;
+        }
+        // Generate winning lucky ball number
+        luckyBall = Math.floor(Math.random() * (18 - 1 + 1)) + 1;
+        // Sort the winning numbers
+        winNums.sort((a, b) => a - b);
+
+        var inputArray, luckyGuess;
+        // Ask the user to enter the numbers and covnert input string into an array
+        inputArray = prompt("Enter winning numbers:", "1 2 3 4 5").split(" ");
+        // Sort the user-entered numbers
+        inputArray.sort((a, b) => a - b);
+        luckyGuess = prompt("Enter lucky number:", "23");
+        
+        // Print results
+        // User guesses
+        document.getElementById("userNums").innerHTML = "Your guesses are: ";
+        for (let i = 0; i < 5; i++) {
+            document.getElementById("userNums").innerHTML += inputArray[i] + " ";
+        }
+        document.getElementById("userNums").innerHTML += " lucky " + luckyGuess;
+        // Winning numbers
+        document.getElementById("winNums").innerHTML = "The winning numbers are: ";
+        for (let i = 0; i < 5; i++) {
+            document.getElementById("winNums").innerHTML += winNums[i] + " ";
+        }
+        document.getElementById("winNums").innerHTML += " lucky " + luckyBall;
+        
+        // Matches
+        var numMatches = 0, lucky = false;
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (inputArray[i] == winNums[j]) {
+                    numMatches ++;
+                }
+            }
+        }
+        document.getElementById("numMatches").innerHTML = "Number of matches: " + numMatches;
+        // Lucky ball
+        if (luckyGuess == luckyBall) {
+            lucky = true;
+            document.getElementById("lucky").innerHTML = "Lucky ball matches!!!";
+        } else {
+            document.getElementById("lucky").innerHTML = "Lucky ball does not match";
+        }
+        
+        // Payout
+        document.getElementById("payout").innerHTML = "Your payout is: ";
+        if (numMatches == 5) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$7,000 a WEEK FOR LIFE";
+            } else {
+                document.getElementById("payout").innerHTML += "$25,000 a YEAR for LIFE";
+            }
+        } else if (numMatches == 4) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$5,000"; 
+            } else {
+                document.getElementById("payout").innerHTML += "$200";
+            }
+        } else if (numMatches == 3) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$150"; 
+            } else {
+                document.getElementById("payout").innerHTML += "$20";
+            }
+        } else if (numMatches == 2) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$25"; 
+            } else {
+                document.getElementById("payout").innerHTML += "$3";
+            }
+        } else if (numMatches == 1) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$6";
+            } else {
+                document.getElementById("payout").innerHTML += "$0";
+            }
+        } else if (numMatches == 0) {
+            if (lucky) {
+                document.getElementById("payout").innerHTML += "$4"; 
+            } else {
+                document.getElementById("payout").innerHTML += "$0";
+            }
+        } else {
+            document.getElementById("payout").innerHTML += "$0";
+        }
+    </script>
+</body>
+</html>

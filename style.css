@@ -1,0 +1,11 @@
+body {
+    background-color: tan;
+}
+
+#userNums, #winNums, #numMatches, #lucky, #payout {
+    color: whitesmoke;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding-top: 1.1rem;
+}
